@@ -45,4 +45,25 @@ class Membership(models.Model):
         unique_together = ('chama', 'member')
 
     def __str__(self):
-        return f"{self.member.full_name} in {self.chama.name}"   
+        return f"{self.member.full_name} in {self.chama.name}"  
+class Contribution(models.Model):
+    PAYMENT_METHOD_CHOICES = [
+        ('cash', 'Cash'),
+        ('mpesa', 'M-Pesa'),
+    ]
+
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('confirmed', 'Confirmed'),
+        ('failed', 'Failed'),
+    ]
+
+    membership = models.ForeignKey(Membership, on_delete=models.CASCADE, related_name='contributions')
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    date_paid = models.DateTimeField(auto_now_add=True)
+    payment_method = models.CharField(max_length=10, choices=PAYMENT_METHOD_CHOICES, default='cash')
+    transaction_reference = models.CharField(max_length=50, blank=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+
+    def __str__(self):
+        return f"{self.membership.member.full_name} - {self.amount} ({self.status})"   
