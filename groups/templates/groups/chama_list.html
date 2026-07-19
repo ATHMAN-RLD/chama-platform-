@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chamas</title>
+</head>
+<body>
+    <h1>Our Chamas</h1>
+    <ul>
+        {% for chama in chamas %}
+            <li>{{ chama.name }} - {{ chama.contribution_amount }} ({{ chama.contribution_frequency }})</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>  
