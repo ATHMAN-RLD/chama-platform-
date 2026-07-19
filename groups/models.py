@@ -15,9 +15,7 @@ class Chama(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.name     
-
-
+        return self.name    
 class Member(models.Model):
     full_name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=15, unique=True)
@@ -26,8 +24,6 @@ class Member(models.Model):
 
     def __str__(self):
         return self.full_name
-
-
 class Membership(models.Model):
     ROLE_CHOICES = [
         ('member', 'Ordinary Member'),
@@ -66,4 +62,21 @@ class Contribution(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
 
     def __str__(self):
-        return f"{self.membership.member.full_name} - {self.amount} ({self.status})"   
+        return f"{self.membership.member.full_name} - {self.amount} ({self.status})" 
+class Loan(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending Approval'),
+        ('active', 'Active'),
+        ('repaid', 'Repaid'),
+        ('defaulted', 'Defaulted'),
+    ]
+
+    membership = models.ForeignKey(Membership, on_delete=models.CASCADE, related_name='loans')
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    interest_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0)
+    date_issued = models.DateTimeField(null=True, blank=True)
+    due_date = models.DateField(null=True, blank=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+
+    def __str__(self):
+        return f"{self.membership.member.full_name} - Loan {self.amount} ({self.status})"  
