@@ -1,0 +1,12 @@
+{% extends 'groups/base.html' %}
+
+{% block title %}Contributions{% endblock %}
+
+{% block content %}
+    <h1>Contributions</h1>
+    <ul>
+        {% for c in contributions %}
+            <li>{{ c.membership.member.full_name }} - {{ c.amount }} ({{ c.status }}) - {{ c.payment_method }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}  
