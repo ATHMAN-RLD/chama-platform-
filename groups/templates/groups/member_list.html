@@ -1,0 +1,12 @@
+{% extends 'groups/base.html' %}
+
+{% block title %}Members{% endblock %}
+
+{% block content %}
+    <h1>Our Members</h1>
+    <ul>
+        {% for member in members %}
+            <li>{{ member.full_name }} - {{ member.phone_number }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}  
