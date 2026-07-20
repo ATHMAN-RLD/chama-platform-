@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Chama Platform{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'groups/style.css' %}">
+</head>
+<body>
+    <nav>
+        <a href="/">Chamas</a>
+    </nav>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>   

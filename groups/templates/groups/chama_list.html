@@ -1,16 +1,12 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Chamas</title>
-    <link rel="stylesheet" href="{% static 'groups/style.css' %}">
-</head>
-<body>
+{% extends 'groups/base.html' %}
+
+{% block title %}Chamas{% endblock %}
+
+{% block content %}
     <h1>Our Chamas</h1>
     <ul>
         {% for chama in chamas %}
             <li>{{ chama.name }} - {{ chama.contribution_amount }} ({{ chama.contribution_frequency }})</li>
         {% endfor %}
     </ul>
-</body>
-</html>    
+{% endblock %}    
