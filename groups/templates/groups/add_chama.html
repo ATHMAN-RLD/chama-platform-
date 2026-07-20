@@ -1,0 +1,12 @@
+{% extends 'groups/base.html' %}
+
+{% block title %}Add Chama{% endblock %}
+
+{% block content %}
+    <h1>Add a New Chama</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Chama</button>
+    </form>
+{% endblock %}  

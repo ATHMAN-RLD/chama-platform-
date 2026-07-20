@@ -4,9 +4,10 @@
 
 {% block content %}
     <h1>Our Chamas</h1>
+    <p><a href="{% url 'add_chama' %}">+ Add New Chama</a></p>
     <ul>
         {% for chama in chamas %}
             <li>{{ chama.name }} - {{ chama.contribution_amount }} ({{ chama.contribution_frequency }})</li>
         {% endfor %}
     </ul>
-{% endblock %}    
+{% endblock %}      
