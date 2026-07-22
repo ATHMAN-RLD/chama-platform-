@@ -46,7 +46,7 @@ def initiate_stk_push(phone_number, amount, account_reference, transaction_desc)
         "PartyA": phone_number,
         "PartyB": shortcode,
         "PhoneNumber": phone_number,
-        "CallBackURL": "https://mydomain.com/callback",
+        "CallBackURL": "https://deception-caption-monopoly.ngrok-free.dev/mpesa/callback/",
         "AccountReference": account_reference,
         "TransactionDesc": transaction_desc
     }
