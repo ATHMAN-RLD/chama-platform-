@@ -8,4 +8,5 @@ urlpatterns = [
     path('loans/', views.loan_list, name='loan_list'),
     path('chamas/add/', views.add_chama, name='add_chama'),
     path('pay/<int:membership_id>/', views.pay_contribution, name='pay_contribution'),
-]  
+    path('mpesa/callback/', views.mpesa_callback, name='mpesa_callback'),
+]   
