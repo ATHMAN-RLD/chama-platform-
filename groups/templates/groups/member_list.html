@@ -6,7 +6,12 @@
     <h1>Our Members</h1>
     <ul>
         {% for member in members %}
-            <li>{{ member.full_name }} - {{ member.phone_number }}</li>
+            <li>
+                {{ member.full_name }} - {{ member.phone_number }}
+                {% for membership in member.memberships.all %}
+                    <a href="{% url 'pay_contribution' membership.id %}">Pay for {{ membership.chama.name }}</a>
+                {% endfor %}
+            </li>
         {% endfor %}
     </ul>
-{% endblock %}  
+{% endblock %}    

@@ -7,4 +7,5 @@ urlpatterns = [
     path('contributions/', views.contribution_list, name='contribution_list'),
     path('loans/', views.loan_list, name='loan_list'),
     path('chamas/add/', views.add_chama, name='add_chama'),
+    path('pay/<int:membership_id>/', views.pay_contribution, name='pay_contribution'),
 ]  

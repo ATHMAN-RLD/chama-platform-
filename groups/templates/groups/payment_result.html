@@ -1,0 +1,11 @@
+{% extends 'groups/base.html' %}
+
+{% block title %}Payment Result{% endblock %}
+
+{% block content %}
+    <h1>Payment Request Sent</h1>
+    <p>Contribution ID: {{ contribution.id }}</p>
+    <p>Status: {{ contribution.status }}</p>
+    <p>Daraja Response:</p>
+    <pre>{{ response }}</pre>
+{% endblock %}   
