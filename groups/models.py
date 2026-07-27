@@ -1,12 +1,10 @@
 from django.db import models
 
-# Create your models here.
 class Chama(models.Model):
     FREQUENCY_CHOICES = [
         ('weekly', 'Weekly'),
         ('monthly', 'Monthly'),
     ]
-
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     contribution_amount = models.DecimalField(max_digits=10, decimal_places=2)
@@ -15,7 +13,9 @@ class Chama(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.name    
+        return self.name
+
+
 class Member(models.Model):
     full_name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=15, unique=True)
@@ -24,13 +24,14 @@ class Member(models.Model):
 
     def __str__(self):
         return self.full_name
+
+
 class Membership(models.Model):
     ROLE_CHOICES = [
         ('member', 'Ordinary Member'),
         ('treasurer', 'Treasurer'),
         ('chairperson', 'Chairperson'),
     ]
-
     chama = models.ForeignKey(Chama, on_delete=models.CASCADE, related_name='memberships')
     member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='memberships')
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='member')
@@ -41,7 +42,9 @@ class Membership(models.Model):
         unique_together = ('chama', 'member')
 
     def __str__(self):
-        return f"{self.member.full_name} in {self.chama.name}"  
+        return f"{self.member.full_name} in {self.chama.name}"
+
+
 class Contribution(models.Model):
     PAYMENT_METHOD_CHOICES = [
         ('cash', 'Cash'),
@@ -60,9 +63,12 @@ class Contribution(models.Model):
     payment_method = models.CharField(max_length=10, choices=PAYMENT_METHOD_CHOICES, default='cash')
     transaction_reference = models.CharField(max_length=50, blank=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+    checkout_request_id = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
-        return f"{self.membership.member.full_name} - {self.amount} ({self.status})" 
+        return f"{self.membership.member.full_name} - {self.amount} ({self.status})"
+
+
 class Loan(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Pending Approval'),
@@ -79,7 +85,9 @@ class Loan(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
 
     def __str__(self):
-        return f"{self.membership.member.full_name} - Loan {self.amount} ({self.status})"  
+        return f"{self.membership.member.full_name} - Loan {self.amount} ({self.status})"
+
+
 class Repayment(models.Model):
     PAYMENT_METHOD_CHOICES = [
         ('cash', 'Cash'),
