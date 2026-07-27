@@ -6,7 +6,7 @@
     <h1>Loans</h1>
     <ul>
         {% for loan in loans %}
-            <li>{{ loan.membership.member.full_name }} - {{ loan.amount }} ({{ loan.status }})</li>
+           <li class="status-{{ loan.status }}">{{ loan.membership.member.full_name }} - {{ loan.amount }} ({{ loan.status }})</li>
         {% endfor %}
     </ul>
 {% endblock %} 

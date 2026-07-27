@@ -6,7 +6,7 @@
     <h1>Contributions</h1>
     <ul>
         {% for c in contributions %}
-            <li>{{ c.membership.member.full_name }} - {{ c.amount }} ({{ c.status }}) - {{ c.payment_method }}</li>
+           <li class="status-{{ c.status }}">{{ c.membership.member.full_name }} - {{ c.amount }} ({{ c.status }}) - {{ c.payment_method }}</li>
         {% endfor %}
     </ul>
 {% endblock %}  
