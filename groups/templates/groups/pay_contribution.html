@@ -4,6 +4,7 @@
 
 {% block content %}
     <h1>Pay Contribution</h1>
+    <hr>
     <p>Paying for: {{ membership.member.full_name }} - {{ membership.chama.name }}</p>
     <form method="POST">
         {% csrf_token %}
@@ -15,4 +16,4 @@
 
         <button type="submit">Pay via M-Pesa</button>
     </form>
-{% endblock %}     
+{% endblock %}      

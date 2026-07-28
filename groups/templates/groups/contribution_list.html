@@ -4,9 +4,10 @@
 
 {% block content %}
     <h1>Contributions</h1>
+    <hr>
     <ul>
         {% for c in contributions %}
            <li class="status-{{ c.status }}">{{ c.membership.member.full_name }} - {{ c.amount }} ({{ c.status }}) - {{ c.payment_method }}</li>
         {% endfor %}
     </ul>
-{% endblock %}  
+{% endblock %}   

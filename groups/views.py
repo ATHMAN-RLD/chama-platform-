@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.db.models import Sum
 from .models import Chama, Member, Membership, Contribution, Loan
 from .forms import ChamaForm
 from . import mpesa
@@ -8,8 +9,28 @@ import json
 
 
 def chama_list(request):
-    chamas = Chama.objects.all()
-    return render(request, 'groups/chama_list.html', {'chamas': chamas})
+    chama = Chama.objects.first()
+
+    member_count = 0
+    total_contributions = 0
+    active_loans_count = 0
+
+    if chama:
+        member_count = chama.memberships.count()
+        total_contributions = Contribution.objects.filter(
+            membership__chama=chama, status='confirmed'
+        ).aggregate(Sum('amount'))['amount__sum'] or 0
+        active_loans_count = Loan.objects.filter(
+            membership__chama=chama, status='active'
+        ).count()
+
+    context = {
+        'chama': chama,
+        'member_count': member_count,
+        'total_contributions': total_contributions,
+        'active_loans_count': active_loans_count,
+    }
+    return render(request, 'groups/chama_list.html', context)
 
 
 def member_list(request):
