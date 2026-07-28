@@ -45,8 +45,16 @@ def contribution_list(request):
 
 def loan_list(request):
     loans = Loan.objects.all()
-    return render(request, 'groups/loan_list.html', {'loans': loans})
-
+    loan_data = []
+    for loan in loans:
+        total_repaid = loan.repayments.aggregate(Sum('amount'))['amount__sum'] or 0
+        remaining = loan.amount - total_repaid
+        loan_data.append({
+            'loan': loan,
+            'total_repaid': total_repaid,
+            'remaining': remaining,
+        })
+    return render(request, 'groups/loan_list.html', {'loan_data': loan_data})
 
 def add_chama(request):
     if request.method == 'POST':
@@ -109,4 +117,4 @@ def mpesa_callback(request):
             contribution.status = 'failed'
             contribution.save()
 
-    return JsonResponse({'ResultCode': 0, 'ResultDesc': 'Accepted'})  
+    return JsonResponse({'ResultCode': 0, 'ResultDesc': 'Accepted'})   

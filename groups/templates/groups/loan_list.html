@@ -3,11 +3,17 @@
 {% block title %}Loans{% endblock %}
 
 {% block content %}
-    <h1>Loans</h1>
-    <hr>
-    <ul>
-        {% for loan in loans %}
-           <li class="status-{{ loan.status }}">{{ loan.membership.member.full_name }} - {{ loan.amount }} ({{ loan.status }})</li>
-        {% endfor %}
-    </ul>
-{% endblock %}   
+<h1>Loans</h1>
+<hr>
+<ul>
+    {% for item in loan_data %}
+        <li class="status-{{ item.loan.status }}">
+            {{ item.loan.membership.member.full_name }} - {{ item.loan.amount }} KES ({{ item.loan.status }})
+            <br>
+            <span style="color: var(--muted); font-size: 0.85rem;">
+                Repaid: {{ item.total_repaid }} KES &nbsp;•&nbsp; Remaining: {{ item.remaining }} KES
+            </span>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
