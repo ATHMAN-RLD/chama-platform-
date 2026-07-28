@@ -1,18 +1,27 @@
 {% extends 'groups/base.html' %}
 
-{% block title %}Chamas{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
 {% block content %}
 <div class="hero">
-    <h1 class="hero-title">Chama Platform</h1>
+    <h1 class="hero-title">Microfinance Chama Platform</h1>
     <p class="hero-subtitle">A trusted ledger for group savings, contributions, and loans — built for real chamas, real money, real accountability.</p>
 </div>
 
-<h1>Our Chamas</h1>
-<p><a href="{% url 'add_chama' %}">+ Add New Chama</a></p>
-<ul>
-    {% for chama in chamas %}
-        <li>{{ chama.name }} - {{ chama.contribution_amount }} ({{ chama.contribution_frequency }})</li>
-    {% endfor %}
-</ul>
-{% endblock %}  
+{% if chama %}
+    <h1>{{ chama.name }}</h1>
+    <hr>
+    <p>{{ chama.description }}</p>
+    <p>Contribution: {{ chama.contribution_amount }} KES ({{ chama.contribution_frequency }})</p>
+
+    <ul>
+        <li>Members: {{ member_count }}</li>
+        <li>Total Confirmed Contributions: {{ total_contributions }} KES</li>
+        <li>Active Loans: {{ active_loans_count }}</li>
+    </ul>
+{% else %}
+    <h1>No organization set up yet</h1>
+    <hr>
+    <p><a href="{% url 'add_chama' %}">Set up your organization</a></p>
+{% endif %}
+{% endblock %}
