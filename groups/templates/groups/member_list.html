@@ -3,16 +3,16 @@
 {% block title %}Members{% endblock %}
 
 {% block content %}
-    <h1>Our Members</h1>
-    <hr>
-    <ul>
-        {% for member in members %}
-            <li>
-                {{ member.full_name }} - {{ member.phone_number }}
-                {% for membership in member.memberships.all %}
-                    <a href="{% url 'pay_contribution' membership.id %}">Pay for {{ membership.chama.name }}</a>
-                {% endfor %}
-            </li>
-        {% endfor %}
-    </ul>
-{% endblock %}     
+<h1>Our Members</h1>
+<hr>
+<ul>
+    {% for member in members %}
+        <li>
+            {{ member.full_name }} - {{ member.phone_number|slice:":4" }}****{{ member.phone_number|slice:"-2:" }}
+            {% for membership in member.memberships.all %}
+                <a href="{% url 'pay_contribution' membership.id %}">Pay for {{ membership.chama.name }}</a>
+            {% endfor %}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}  
