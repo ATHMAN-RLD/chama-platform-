@@ -100,6 +100,48 @@ body {
     overflow: hidden;
 }
 
+/* DIAGONAL DIVIDER */
+.diagonal-divider {
+    position: relative;
+    height: 60px;
+    margin: 0 -40px 40px -40px;
+    background: linear-gradient(90deg, var(--red) 0%, var(--gold) 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 30%);
+}
+
+/* FEATURES SECTION */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 48px;
+}
+
+.feature-card {
+    padding: 20px 0;
+}
+
+.feature-icon {
+    width: 32px;
+    height: 32px;
+    stroke: var(--red);
+    margin-bottom: 14px;
+}
+
+.feature-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: var(--gold);
+    font-size: 1.1rem;
+    margin: 0 0 8px 0;
+}
+
+.feature-text {
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
 .stat-icon {
     width: 28px;
     height: 28px;

@@ -8,6 +8,8 @@
     <p class="hero-subtitle">A trusted ledger for group savings, contributions, and loans — built for real chamas, real money, real accountability.</p>
 </div>
 
+<div class="diagonal-divider"></div>
+
 {% if chama %}
     <h1>{{ chama.name }}</h1>
     <hr>
@@ -43,9 +45,40 @@
             <p class="stat-label">Active Loans</p>
         </div>
     </div>
+
+    <h1>Why This Platform</h1>
+    <hr>
+    <div class="features-grid">
+        <div class="feature-card">
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2 3 6v6c0 5 4 9 9 10 5-1 9-5 9-10V6l-9-4z"/>
+                <path d="m9 12 2 2 4-4"/>
+            </svg>
+            <p class="feature-title">Secure by Design</p>
+            <p class="feature-text">Every contribution is verified directly against Safaricom's M-Pesa systems before being recorded — no manual entry, no guesswork.</p>
+        </div>
+
+        <div class="feature-card">
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2"/>
+                <path d="M16 2v4M8 2v4M3 10h18"/>
+                <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/>
+            </svg>
+            <p class="feature-title">A Living Ledger</p>
+            <p class="feature-text">Every contribution and repayment is timestamped and traceable — a permanent, transparent record for every member.</p>
+        </div>
+
+        <div class="feature-card">
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M13 2 3 14h8l-1 8 11-14h-8l1-6z"/>
+            </svg>
+            <p class="feature-title">Instant Payments</p>
+            <p class="feature-text">M-Pesa STK Push means members pay directly from their phone — no cash handling, no delays, no confusion.</p>
+        </div>
+    </div>
 {% else %}
     <h1>No organization set up yet</h1>
     <hr>
     <p><a href="{% url 'add_chama' %}">Set up your organization</a></p>
 {% endif %}
-{% endblock %}
+{% endblock %} 
