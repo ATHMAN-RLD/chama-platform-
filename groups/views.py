@@ -6,6 +6,7 @@ from . import mpesa
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
+from .forms import ChamaForm, RepaymentForm
 
 
 def chama_list(request):
@@ -89,6 +90,19 @@ def pay_contribution(request, membership_id):
             contribution.save()
         return render(request, 'groups/payment_result.html', {'response': response, 'contribution': contribution})
     return render(request, 'groups/pay_contribution.html', {'membership': membership})
+
+def add_repayment(request, loan_id):
+    loan = Loan.objects.get(id=loan_id)
+    if request.method == 'POST':
+        form = RepaymentForm(request.POST)
+        if form.is_valid():
+            repayment = form.save(commit=False)
+            repayment.loan = loan
+            repayment.save()
+            return redirect('loan_list')
+    else:
+        form = RepaymentForm()
+    return render(request, 'groups/add_repayment.html', {'form': form, 'loan': loan})
 
 
 @csrf_exempt

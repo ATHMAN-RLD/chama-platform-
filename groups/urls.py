@@ -9,4 +9,5 @@ urlpatterns = [
     path('chamas/add/', views.add_chama, name='add_chama'),
     path('pay/<int:membership_id>/', views.pay_contribution, name='pay_contribution'),
     path('mpesa/callback/', views.mpesa_callback, name='mpesa_callback'),
-]   
+    path('loans/<int:loan_id>/repay/', views.add_repayment, name='add_repayment'),
+]  

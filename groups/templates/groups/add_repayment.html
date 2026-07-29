@@ -1,0 +1,14 @@
+{% extends 'groups/base.html' %}
+
+{% block title %}Record Repayment{% endblock %}
+
+{% block content %}
+<h1>Record Repayment</h1>
+<hr>
+<p class="org-meta">For: {{ loan.membership.member.full_name }} - Loan of {{ loan.amount }} KES</p>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Repayment</button>
+</form>
+{% endblock %} 
