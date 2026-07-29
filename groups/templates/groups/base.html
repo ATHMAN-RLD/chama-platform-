@@ -16,7 +16,7 @@
         <button type="submit" style="background:none;border:none;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-size:0.85rem;cursor:pointer;padding:0;font-family:'Inter',sans-serif;">Logout ({{ user.username }})</button>
     </form>
 {% else %}
-    | <a href="{% url 'login' %}">Login</a>
+    | <a href="/admin/login/">Login</a>
 {% endif %}
 </nav>
     <main>

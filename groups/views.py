@@ -1,14 +1,15 @@
 from django.shortcuts import render, redirect
 from django.db.models import Sum
+from django.contrib.auth.decorators import login_required
 from .models import Chama, Member, Membership, Contribution, Loan
-from .forms import ChamaForm
+from .forms import ChamaForm, RepaymentForm
 from . import mpesa
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
-from .forms import ChamaForm, RepaymentForm
 
 
+@login_required
 def chama_list(request):
     chama = Chama.objects.first()
 
@@ -34,16 +35,19 @@ def chama_list(request):
     return render(request, 'groups/chama_list.html', context)
 
 
+@login_required
 def member_list(request):
     members = Member.objects.all()
     return render(request, 'groups/member_list.html', {'members': members})
 
 
+@login_required
 def contribution_list(request):
     contributions = Contribution.objects.all()
     return render(request, 'groups/contribution_list.html', {'contributions': contributions})
 
 
+@login_required
 def loan_list(request):
     loans = Loan.objects.all()
     loan_data = []
@@ -57,6 +61,8 @@ def loan_list(request):
         })
     return render(request, 'groups/loan_list.html', {'loan_data': loan_data})
 
+
+@login_required
 def add_chama(request):
     if request.method == 'POST':
         form = ChamaForm(request.POST)
@@ -68,6 +74,7 @@ def add_chama(request):
     return render(request, 'groups/add_chama.html', {'form': form})
 
 
+@login_required
 def pay_contribution(request, membership_id):
     membership = Membership.objects.get(id=membership_id)
     if request.method == 'POST':
@@ -91,6 +98,8 @@ def pay_contribution(request, membership_id):
         return render(request, 'groups/payment_result.html', {'response': response, 'contribution': contribution})
     return render(request, 'groups/pay_contribution.html', {'membership': membership})
 
+
+@login_required
 def add_repayment(request, loan_id):
     loan = Loan.objects.get(id=loan_id)
     if request.method == 'POST':
@@ -131,4 +140,4 @@ def mpesa_callback(request):
             contribution.status = 'failed'
             contribution.save()
 
-    return JsonResponse({'ResultCode': 0, 'ResultDesc': 'Accepted'})   
+    return JsonResponse({'ResultCode': 0, 'ResultDesc': 'Accepted'}) 
