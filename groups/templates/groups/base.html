@@ -10,6 +10,14 @@
 <body>
 <nav>
     <a href="/">Dashboard</a> | <a href="/members/">Members</a> | <a href="/contributions/">Contributions</a> | <a href="/loans/">Loans</a>
+    {% if user.is_authenticated %}
+    | <form method="POST" action="{% url 'logout' %}" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" style="background:none;border:none;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-size:0.85rem;cursor:pointer;padding:0;font-family:'Inter',sans-serif;">Logout ({{ user.username }})</button>
+    </form>
+{% else %}
+    | <a href="{% url 'login' %}">Login</a>
+{% endif %}
 </nav>
     <main>
         {% block content %}
