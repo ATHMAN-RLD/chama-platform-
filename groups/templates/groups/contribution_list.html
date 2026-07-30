@@ -3,11 +3,17 @@
 {% block title %}Contributions{% endblock %}
 
 {% block content %}
-    <h1>Contributions</h1>
-    <hr>
-    <ul>
-        {% for c in contributions %}
-           <li class="status-{{ c.status }}">{{ c.membership.member.full_name }} - {{ c.amount }} ({{ c.status }}) - {{ c.payment_method }}</li>
-        {% endfor %}
-    </ul>
-{% endblock %}   
+<h1>Contributions</h1>
+<hr>
+<ul>
+    {% for c in contributions %}
+        <li class="status-{{ c.status }}">
+            {{ c.membership.member.full_name }} - {{ c.amount }} ({{ c.status }}) - {{ c.payment_method }}
+            {% if c.transaction_reference %}
+                <br>
+                <span style="color: var(--muted); font-size: 0.85rem;">Receipt: {{ c.transaction_reference }}</span>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %} 
