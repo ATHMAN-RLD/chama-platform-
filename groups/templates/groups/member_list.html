@@ -6,12 +6,14 @@
 <h1>Our Members</h1>
 <hr>
 <ul>
-    {% for member in members %}
+    {% for item in member_data %}
         <li>
-            {{ member.full_name }} - {{ member.phone_number|slice:":4" }}****{{ member.phone_number|slice:"-2:" }}
-            {% for membership in member.memberships.all %}
+            {{ item.member.full_name }} - {{ item.member.phone_number|slice:":4" }}****{{ item.member.phone_number|slice:"-2:" }}
+            {% for membership in item.member.memberships.all %}
                 <a href="{% url 'pay_contribution' membership.id %}">Pay for {{ membership.chama.name }}</a>
             {% endfor %}
+            <br>
+            <span style="color: var(--muted); font-size: 0.85rem;">Total Confirmed Contributions: {{ item.total_contributed }} KES</span>
         </li>
     {% endfor %}
 </ul>

@@ -38,7 +38,16 @@ def chama_list(request):
 @login_required
 def member_list(request):
     members = Member.objects.all()
-    return render(request, 'groups/member_list.html', {'members': members})
+    member_data = []
+    for member in members:
+        total_contributed = Contribution.objects.filter(
+            membership__member=member, status='confirmed'
+        ).aggregate(Sum('amount'))['amount__sum'] or 0
+        member_data.append({
+            'member': member,
+            'total_contributed': total_contributed,
+        })
+    return render(request, 'groups/member_list.html', {'member_data': member_data})
 
 
 @login_required
@@ -140,4 +149,4 @@ def mpesa_callback(request):
             contribution.status = 'failed'
             contribution.save()
 
-    return JsonResponse({'ResultCode': 0, 'ResultDesc': 'Accepted'}) 
+    return JsonResponse({'ResultCode': 0, 'ResultDesc': 'Accepted'})  
