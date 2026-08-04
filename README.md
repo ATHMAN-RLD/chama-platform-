@@ -36,4 +36,14 @@ Many Kenyan chamas and SACCOs still rely on spreadsheets, WhatsApp groups, or ma
 
 ## Screenshots
 
-*(to be added)*
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### Members
+![Members](screenshots/members.png)
+
+### Contributions
+![Contributions](screenshots/contributions.png)
+
+### Loans
+![Loans](screenshots/loans.png)
