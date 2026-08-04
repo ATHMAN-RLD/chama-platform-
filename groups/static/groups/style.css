@@ -142,6 +142,25 @@ body {
     margin: 0;
 }
 
+/* LIST ITEM ICONS */
+li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.li-icon {
+    width: 20px;
+    height: 20px;
+    stroke: var(--gold);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.li-content {
+    flex: 1;
+}
+
 .stat-icon {
     width: 28px;
     height: 28px;

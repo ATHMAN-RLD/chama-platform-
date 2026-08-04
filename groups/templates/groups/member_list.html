@@ -8,12 +8,18 @@
 <ul>
     {% for item in member_data %}
         <li>
-            {{ item.member.full_name }} - {{ item.member.phone_number|slice:":4" }}****{{ item.member.phone_number|slice:"-2:" }}
-            {% for membership in item.member.memberships.all %}
-                <a href="{% url 'pay_contribution' membership.id %}">Pay for {{ membership.chama.name }}</a>
-            {% endfor %}
-            <br>
-            <span style="color: var(--muted); font-size: 0.85rem;">Total Confirmed Contributions: {{ item.total_contributed }} KES</span>
+            <svg class="li-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
+            </svg>
+            <div class="li-content">
+                {{ item.member.full_name }} - {{ item.member.phone_number|slice:":4" }}****{{ item.member.phone_number|slice:"-2:" }}
+                {% for membership in item.member.memberships.all %}
+                    <a href="{% url 'pay_contribution' membership.id %}">Pay for {{ membership.chama.name }}</a>
+                {% endfor %}
+                <br>
+                <span style="color: var(--muted); font-size: 0.85rem;">Total Confirmed Contributions: {{ item.total_contributed }} KES</span>
+            </div>
         </li>
     {% endfor %}
 </ul>

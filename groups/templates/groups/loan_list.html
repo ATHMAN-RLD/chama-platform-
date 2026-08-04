@@ -8,13 +8,19 @@
 <ul>
     {% for item in loan_data %}
         <li class="status-{{ item.loan.status }}">
-    {{ item.loan.membership.member.full_name }} - {{ item.loan.amount }} KES ({{ item.loan.status }})
-    <a href="{% url 'add_repayment' item.loan.id %}">Record Repayment</a>
-    <br>
-    <span style="color: var(--muted); font-size: 0.85rem;">
-        Repaid: {{ item.total_repaid }} KES &nbsp;•&nbsp; Remaining: {{ item.remaining }} KES
-    </span>
-</li>
+            <svg class="li-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="7" width="18" height="13" rx="2"/>
+                <path d="M16 7V5a4 4 0 0 0-8 0v2"/>
+            </svg>
+            <div class="li-content">
+                {{ item.loan.membership.member.full_name }} - {{ item.loan.amount }} KES ({{ item.loan.status }})
+                <a href="{% url 'add_repayment' item.loan.id %}">Record Repayment</a>
+                <br>
+                <span style="color: var(--muted); font-size: 0.85rem;">
+                    Repaid: {{ item.total_repaid }} KES &nbsp;•&nbsp; Remaining: {{ item.remaining }} KES
+                </span>
+            </div>
+        </li>
     {% endfor %}
 </ul>
-{% endblock %} 
+{% endblock %}  

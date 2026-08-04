@@ -8,12 +8,18 @@
 <ul>
     {% for c in contributions %}
         <li class="status-{{ c.status }}">
-            {{ c.membership.member.full_name }} - {{ c.amount }} ({{ c.status }}) - {{ c.payment_method }}
-            {% if c.transaction_reference %}
-                <br>
-                <span style="color: var(--muted); font-size: 0.85rem;">Receipt: {{ c.transaction_reference }}</span>
-            {% endif %}
+            <svg class="li-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 7v10M9 9.5c0-1.4 1.3-2.5 3-2.5s3 1.1 3 2.5-1.3 2-3 2.5-3 1.1-3 2.5 1.3 2.5 3 2.5 3-1.1 3-2.5"/>
+            </svg>
+            <div class="li-content">
+                {{ c.membership.member.full_name }} - {{ c.amount }} ({{ c.status }}) - {{ c.payment_method }}
+                {% if c.transaction_reference %}
+                    <br>
+                    <span style="color: var(--muted); font-size: 0.85rem;">Receipt: {{ c.transaction_reference }}</span>
+                {% endif %}
+            </div>
         </li>
     {% endfor %}
 </ul>
-{% endblock %} 
+{% endblock %}  
